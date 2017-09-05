@@ -1,16 +1,15 @@
 # Website must allow X-ORIGN requests
-# can either scroll, or click but not both atm...
 # takes a url: String & a container: Layer
 
 class WebView extends ScrollComponent 
 	constructor: (@options={}) -> 
 		@url ?= 'https://www.youtube.com/embed/u4RjCmeuWDU'
-		@container ?= Screen 
+		@container = if @options.container then @options.container else new Layer
+			frame: Screen.frame
+			name: 'container'
 		super @options
 		@.scrollHorizontal = false
-		# @.height = @options.container.height
-		# @.width =  @options.container.width
-		@.parent = @container
+		@.parent = @options.container
 		@.page = new Layer
 			parent: @.content
 			width: @.width
@@ -19,7 +18,6 @@ class WebView extends ScrollComponent
 			ignoreEvents: false 
 						
 			html: "<iframe width='#{@.width}' height='#{@.height}' src='#{@options.url}' allowfullscreen frameborder='0' scrolling='yes'></iframe>"
-		console.log(@url)
 		@iframe =  @.page.querySelector('iframe')
 		@setContainer(@container)
 		              
