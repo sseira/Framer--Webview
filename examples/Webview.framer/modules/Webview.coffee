@@ -3,7 +3,7 @@
 
 class WebView extends ScrollComponent 
 	constructor: (@options={}) -> 
-		@url ?= 'https://www.youtube.com/embed/u4RjCmeuWDU'
+		@url ?= "https://www.youtube.com/embed/-kWbZvVU-e0?start=60"
 		@container = if @options.container then @options.container else new Layer
 			frame: Screen.frame
 			name: 'container'
